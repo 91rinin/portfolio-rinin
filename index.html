@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>rininの网站</title>
+    <style>
+        /*基础样式*/
+        body {
+            background:#e0e0e0;
+            padding:20px;
+            margin:0;
+            border-radius:10px;
+            font-size:medium;
+            transition:all 0.3s ease;
+            font-family:'Arial', sans-serif;
+        }
+        /*导航栏样式*/
+        nav {
+            background-color:rgb(139, 108, 93);
+            padding:20px;
+            margin-bottom:20px;
+            border-radius:10px;
+            transition:all 0.3s ease;
+        }
+        /*超链接*/
+        nav a {
+            color:rgb(255, 255, 255);
+            text-decoration:none;
+            padding:5px 10px;
+            border-radius:10px;
+            margin-right:15px;
+            transition:all 0.3s ease ;
+        }
+        /*鼠标悬停效果*/
+        nav a:hover {
+            color:rgb(0, 0, 0) !important;
+            background-color:rgb(145, 47, 20);
+            transform:translateY(-2px);
+        }
+        /*内容区块样式*/
+        .profile-card {
+            background-color:rgb(240, 169, 205);
+            padding:10px;
+            border:10px solid rgb(136, 96, 136) ;
+            margin:20px 0;
+            border-radius:10px;
+            box-shadow:0 10px 15px rgba(0,0,0,0.1);
+            color:rgb(255, 255, 255) ;
+            transition:all 0.3s ease;
+        }
+        /*项目卡片样式*/
+        .project-card {
+            background-color:rgb(123, 61, 61);
+            padding:10px;
+            border-radius:10px;
+            box-shadow:0 5px 10px rgba(0, 0, 0, 0.1);
+            width:300px;
+            transition:all 0.3s ease;
+            margin:10px;
+            color:white;
+        }
+        /*鼠标悬停效果*/
+        .project-card:hover {
+            transform:translateY(-5px) scale(1.02);
+            box-shadow:0 5px 10px rgba(0,0,0,0.1);
+        }
+        /*项目预览图*/
+        .project-preview-1 {
+            background-color:rgb(199, 188, 161);
+            height:180px;
+            border-radius:8px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color:white;
+            font-size:20px;
+            cursor:pointer;
+            transition:all 0.3s ease;
+        }
+        .project-preview-2 {
+            background-color:rgb(215, 206, 184);
+            height:180px;
+            border-radius:8px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            color:white;
+            font-size:20px;
+            cursor:pointer;
+            transition:all 0.3s ease;
+        }
+        .project-preview-3 {
+            background-color:rgb(215, 206, 184);
+            height:180px;
+            border-radius:8px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            color:white;
+            font-size:20px;
+            cursor:pointer;
+            transition:all 0.3s ease;
+        }
+        .coming-soon {
+            background-color:rgb(61, 56, 43);
+            height:180px;
+            border-radius:8px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color:white;
+            font-size:20px;
+            cursor: pointer;
+            transition:all 0.3s ease;
+        }
+        /*按钮样式*/
+        .detail-btn {
+            background-color:rgb(255, 255, 255);
+            color:rgb(221, 194, 107);
+            border:none;
+            padding:8px 15px;
+            border-radius:5px;
+            cursor:pointer;
+            margin-top:10px;
+            transition:all 0.3s ease;
+            width:100%;
+        }
+        .detail-btn:hover {
+            background-color:rgb(30,30,30);
+            color:white;
+            transform:translateY(-2px);
+        }
+        .theme-btn {
+            background-color:rgb(255, 255, 255);
+            color:rgb(221, 194, 107);
+            border:none;
+            padding:8px 15px;
+            border-radius:5px;
+            cursor:pointer;
+            margin:5px;
+            transition:all 0.3s ease;
+        }
+        .theme-btn:hover {
+            background-color:rgb(30,30,30);
+            color:white;
+            transform:translateY(-2px);
+        }
+        .dark-mode-btn {
+            background-color:rgb(50,50,50);
+            color:white;
+            border:none;
+            padding:10px 20px;
+            border-radius:5px;
+            cursor:pointer;
+            margin:10px;
+            transition:all 0.3s ease;
+        }
+        .dark-mode-btn:hover {
+            background-color:rgb(205, 61, 61);
+            transform:translateY(-2px);
+        }
+        /*项目展示区*/
+        .projects-section {
+            background-color:#c78c8c;
+            padding:40px 20px;
+            border-radius:15px;
+            margin:40px 0;
+        }
+        .projects-container {
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:20px;
+        }
+        .dark-mode {
+            background-color:#1a1a1a;
+            color:white;
+        }
+        .dark-mode .profile-card {
+            background-color:#2d2d2d;
+            border-color:#444;
+        }
+        .dark-mode nav {
+            background-color:#2d2d2d;
+        }
+        .dark-mode .project-card {
+            background-color:#333;
+        }
+        .dark-mode nav a {
+            color:#ffffff;
+        }
+        .dark-mode .projects-section {
+            background-color:#5c3c3c;
+        }
+
+        /*跳过导航链接-默认隐藏*/
+        .skip-link {
+            position:absolute;
+            top:-40px;
+            left:6px;
+            background:#000;
+            color:white;
+            padding:8px;
+            z-index:100;
+            text-decoration:none;
+            border-radius:0 0 4px 4px;
+        }
+        .skip-link:focus {
+            top:0;
+        }
+
+        /*屏幕阅读专用类*/ 
+        .sr-only {
+            position:absolute;
+            width:1px;
+            height:1px;
+            padding:0;
+            margin:-1px;
+            overflow:hidden;
+            clip:rect(0,0,0,0);
+            white-space:nowrap;
+            border:0;
+        }
+
+        /*焦点样式改进*/
+        a:focus, button:focus {
+            outline:3px solid #ff1439;
+            outline-offset:2px;
+        }
+
+        /*高对比度支持*/
+        @media (prefers-contrast:high) {
+            .profile-card {
+                border:3px solid #000;
+            }
+            .project-card {
+                border:2px solid #fff;
+            }
+        }
+
+        /*减少动画支持*/
+        @media (prefers-reduced-motion:reduce) {
+            *{
+                animation-duration:0.01ms !important;
+                animation-iteration-count:1 !important;
+                transition-duration:0.01ms !important;
+            }
+        }
+        /**媒体查询示列*/
+        @media (max-width:768px) {
+            body {
+                padding:10px;
+            }
+            .project-card {
+                width:100%;
+                margin:10px 0;
+            }
+            nav {
+                text-align:center;
+            }
+            nav a {
+                display:block;
+                margin:10px 0;
+            }
+            .projects-container {
+                flex-direction:column;
+                align-items:center;
+            }
+        }
+
+        @media (max-width:480px) {
+            h1 {
+                font-size:24px;
+            }
+            .project-card {
+                padding:15px;
+            }
+            .projects-section {
+                padding:20px 10px;
+            }
+            img {
+                width:100%;
+                max-width:300px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">跳过导航</a>
+
+    <header role="banner">
+        <h1 id="myTitle">Rinin个人网站</h1>
+    </header>
+    <nav role="navigation" aria-label="主导航">
+        <a href="index.html" aria-current="page" style="margin-right:15px;">首页</a>
+        <a href="关于我-2.html" style="margin-right:15px;">关于我</a>
+        <a href="作品集-3.html" style="margin-right:15px;">作品集</a>
+        <a href="联系方式-4.html">联系方式</a>
+    </nav>
+
+    <main id="main-content" role="main">
+        <div class="profile-card" role="article" aria-labelledby="profile-heading">
+            <div style="font-size:30px; text-align:center;" aria-hidden="true">+💻👧+</div>
+            <h3 id="profile-heading">你好，我是Rinin!</h3>
+            <p>我是一名热情而专注的大学生，专业是电子商务，努力成为优秀的听障人士。</p>
+            <p><strong>🎋技能树：</strong><span aria-label="P S, A I, H T M L, C S S, JavaScript,英语,日语">PS、AI、HTML、CSS、JavaScprit、English、Japanese.</span></p>
+            <p><strong>✨目标：</strong>在毕业之前，成为一名初级前端开发者，成为全面的战士,成为优秀的人。</p>
+            <p><strong>📝座右铭：</strong>坚持就是力量，沉默不是障碍，而是武器。</p>
+            <p><strong>🎢信念：</strong>要相信自己，一定会成功的，只是时间慢一点，脚步求稳当，享受过程。</p>
+        </div>
+        <section class="projects-section">
+            <h2 style="text-align:center; color:rgb(255, 255, 255); margin-bottom:30px;">我的项目展示</h2>
+            <div class="projects-container">
+                <div class="project-card">
+                    <h3 style="color:rgb(255, 255, 255)">个人空间网站</h3>
+                    <p>创建一个网站，HTML/CSS/JavaScript。</p>
+                    <div class="project-preview-1">项目预览图1</div>
+                    <br>
+                    <button class="detail-btn" onclick="showProjectDetail('project1')">查看详情</button>
+                    <button class="detail-btn"><a href="个人网站.html" style="color:#83d3fc;">访问查看</a></button>
+                    <br>
+                </div>
+                <div class="project-card">
+                    <h3 style="color:rgb(255, 255, 255)">项目管理系统</h3>
+                    <p>创建一个初级的项目管理系统，Vue。</p>
+                    <div class="project-preview-2">项目预览图2</div>
+                    <button class="detail-btn" onclick="showProjectDetail('project2')">查看详情</button>
+                    <button class="detail-btn"><a href="个人项目管理系统.html" style="color:#83d3fc;">访问查看</a></button>
+                    <br>
+                </div>
+                <div class="project-card">
+                    <h3 style="color:white;">趣味小游戏网站</h3>
+                    <p>创建一个趣味小游戏网站。</p>
+                    <div class="project-preview-3">项目预览图3</div>
+                    <button class="detail-btn" onclick="showProjectDetail('project3')">查看详情</button>
+                    <button class="detail-btn"><a href="小游戏.html" style="color:#83d3fc;">访问查看</a></button>
+                    <br>
+                </div>
+                <div class="project-card">
+                    <h3 style="color:rgb(255,255,255)">待开发项目</h3>
+                    <p>这里将展示我的下一个精彩项目，敬请期待！</p>
+                    <div class="coming-soon">coming soon...</div>
+                    <button class="detail-btn" onclick="showProjectDetail('project4')">查看详情</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <img src="小熊.jpg"
+        width="400px"
+        style="border-radius:10px;margin:20px;display:block;margin-left:auto;margin-right:auto;"
+        alt="一只可爱的泰迪熊玩偶，躺在草地上"
+        loading="lazy">
+
+    <div style="margin:20px 0; text-align:center;">
+        <button class="theme-btn" onclick="changeTheme('lightblue','darkblue')">海洋</button>
+        <button class="theme-btn" onclick="changeTheme('lightgreen','darkgreen')">森林</button>
+        <button class="theme-btn" onclick="changeTheme('lightpink','#ff1439')">粉色</button>
+    </div>
+    
+    <div style="margin:20px 0; text-align:center">
+        <button class="theme-btn" onclick="alert('你好，你击中了我！')">点我试试！</button>
+        <button class="theme-btn" onclick="document.getElementById('myTitle').innerHTML='欢迎你回来，程序员！'">改变标题</button>
+    </div>
+    
+    <p style="text-align:center;">欢迎访问！<a href="https://www.bilibili.com" style="color:rgb(255, 0, 0); text-decoration:none;">B站</a>！</p>
+
+    <div style="text-align:center; margin:20px 0;">
+        <button class="dark-mode-btn"
+            onclick="toggleDarkMode()"
+            aria-pressed="false"
+            id="dark-mode-toggle">
+            <span class="button-text">暗黑模式</span>
+            <span class="sr-only">切换深色和浅色主题</span>
+        </button>
+    </div>
+
+    <script>
+        function changeTheme(bgColor,textColor) {
+            document.body.style.backgroundColor = bgColor;
+            document.getElementById('myTitle').style.color = textColor;
+        }
+        function showProjectDetail(projectId) {
+            if (projectId==='project1') {
+                alert('项目名称：个人空间网站\n\n技术栈：HTML,CSS,JavaScript\n\n描述：这是我独立构建的初级响应式个人网站，包含了主题切换、项目展示等高级功能。');
+            } else if (projectId==='project2') {
+                alert('项目名称：项目管理系统\n\n运用Vue\n\n描述：这是我独立运用Vue构建一个初级项目管理系统，风格有常规模式和暗黑模式。');
+            } else if (projectId==='project3') {
+                alert('项目名称：小游戏\n\n描述：这是我独立创建的一个趣味小游戏网站。');
+            } else if (projectId==='project4') {
+                alert('项目名称：待开发项目\n\n状态：构思中...\n\n描述：即将迎来精彩项目，敬请期待！');
+            }
+        }
+        function toggleDarkMode() {
+            const isDarkMode = document.body.classList.toggle('dark-mode');
+            const button = document.getElementById('dark-mode-toggle');
+            //更新ARIA状态
+            button.setAttribute('aria-pressed',isDarkMode);
+
+            //为屏幕阅读器提供反馈
+            const status = isDarkMode ? '已开启暗黑模式' : '已关闭暗黑模式';
+            announceToScreenReader(status);
+        }
+        // 屏幕阅读器公告函数
+        function announceToScreenReader(message) {
+            const announcer = document.getElementById('aria-announcer') || createAriaAnnouncer();
+            announcer.textContent = message;
+        }
+
+        function createAriaAnnouncer() {
+            const announcer = document.createElement('div');
+            announcer.id = 'aria-announcer';
+            announcer.setAttribute('aria-live', 'polite');
+            announcer.setAttribute('aria-atomic', 'true');
+            announcer.className = 'sr-only';
+            document.body.appendChild(announcer);
+            return announcer;
+        }
+        // 改进主题切换
+        function changeTheme(bgColor, textColor) {
+            document.body.style.backgroundColor = bgColor;
+            document.getElementById('myTitle').style.color = textColor;
+            
+            // 为屏幕阅读器提供反馈
+            const themeName = getThemeName(bgColor);
+            announceToScreenReader(`已切换到${themeName}主题`);
+        }
+        function getThemeName(color) {
+            const themes = {
+                'lightblue': '海洋',
+                'lightgreen': '森林', 
+                'lightpink': '粉色'
+            };
+            return themes[color] || '新';
+        }
+
+    </script>
+</body>
+</html>
