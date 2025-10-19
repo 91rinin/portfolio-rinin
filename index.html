@@ -36,7 +36,7 @@
         nav a:hover {
             color:rgb(0, 0, 0) !important;
             background-color:rgb(145, 47, 20);
-            transform:translateY(-2px);
+            transform:translateY(-10px);
         }
         /*内容区块样式*/
         .profile-card {
@@ -62,8 +62,22 @@
         }
         /*鼠标悬停效果*/
         .project-card:hover {
-            transform:translateY(-5px) scale(1.02);
+            transform:translateY(-10px) scale(1.02);
             box-shadow:0 5px 10px rgba(0,0,0,0.1);
+        }
+        /*项目展示区*/
+        .projects-section {
+            background-color:#c78c8c;
+            padding:40px 20px;
+            border-radius:15px;
+            margin:40px 0;
+        }
+        /*项目容器区域*/
+        .projects-container {
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:20px;
         }
         /*项目预览图*/
         .project-preview-1 {
@@ -160,19 +174,6 @@
             background-color:rgb(205, 61, 61);
             transform:translateY(-2px);
         }
-        /*项目展示区*/
-        .projects-section {
-            background-color:#c78c8c;
-            padding:40px 20px;
-            border-radius:15px;
-            margin:40px 0;
-        }
-        .projects-container {
-            display:flex;
-            flex-wrap:wrap;
-            justify-content:center;
-            gap:20px;
-        }
         .dark-mode {
             background-color:#1a1a1a;
             color:white;
@@ -192,6 +193,129 @@
         }
         .dark-mode .projects-section {
             background-color:#5c3c3c;
+        }
+        /*添加任务部分*/
+        .learning-progress {
+            background-color:#8e56b4;
+            padding:20px;
+            border-radius:10px;
+            margin:20px 0;
+            color:#72ff9d;
+        }
+        /*进度条容器，让进度条和文字并排显示*/
+        .progress-container {
+            display:flex;
+            align-items:center;
+            gap:15px;
+            margin:20px 0;
+        }
+        /*进度条背景，progress-bar就是进度条的轨道*/
+        .progress-bar {
+            flex-grow:1;/*占满剩余空间*/
+            height:10px;
+            background-color:#ca8989;/*灰色背景*/
+            border-radius:10px;
+            overflow:hidden;/*重要：让填充部分不超出边界*/
+        }
+        /*进度条填充部分，它的宽度就是进度百分比*/
+        .progress-fill {
+            height:100%;
+            width:70%;
+            background-color:#96ff76;
+            border-radius:10px;
+            transition:width 0.5s ease-in-out;/*平滑动画效果*/
+        }
+        /*百分比文字*/
+        .progress-text {
+            font-size:18px;
+            font-weight:bold;
+        }
+
+        /*任务列表样式*/
+        .task-list {
+            list-style:none;/*去掉列表默认的小圆点*/
+            padding:0;
+            margin:20px 0;
+        }
+        /*单个任务项样式*/
+        .task-item {
+            background-color:#b488b1;
+            margin-bottom:8px;
+            padding:12px;
+            border-radius:6px;
+            display:flex;
+            align-items:center;
+            transition:all 0.3s ease;
+        }
+        /*复选框样式*/
+        .task-item input[type="checkbox"] {
+            margin-right:10px;
+            transform:scale(1.2);/*稍微放大复选框*/
+        }
+        /*已完成任务的样式*/
+        .task-item.completed {
+            text-decoration:line-through;/*在文字中间添加一条删除线*/
+            opacity:0.6;/*设置元素的不透明度，变淡变灰*/
+        }
+        /*鼠标悬停效果*/
+        .task-item:hover {
+            background-color:#db8849;
+            transform:translateX(5px);
+        }
+        .add-task {
+            display:flex;
+            margin-top:20px;
+        }
+        .add-task input {
+            flex-grow:1;/*输入框占满剩余空间*/
+            padding:10px;
+            border:none;
+            border-radius:5px 0 0 5px;
+            outline:none;
+        }
+        .add-task button {
+            padding:10px 20px;
+            border:none;
+            background-color:#b488b1;
+            color:white;
+            border-radius:0 5px 5px 0;
+            cursor:pointer;
+            transition:all 0.3s ease;
+        }
+        .add-task button:hover {
+            background-color:#444;
+        }
+
+        /*删除任务*/
+        .delete-btn {
+            background:none;
+            border:none;
+            color:red;
+            font-size:18px;
+            cursor:pointer;
+            margin-left:auto;
+            padding:0 8px;
+        }
+        .delete-btn:hover {
+            color:#ff0000;
+            transform:scale(1.2);
+        }
+        /*添加统计样式*/
+        .task-stats {
+            text-align:center;
+            margin:10px 0;
+            font-size:14px;
+            opacity:0.8;
+        }
+
+        /*添加完成动画*/
+        @keyframes taskComplete {
+            0% {transform:scale(1);}
+            50% {transform:scale(1.05);}
+            100% {transform:scale(1);}
+        }
+        .task-item.completed {
+            animation:taskComplete 0.5s ease-in-out;
         }
 
         /*跳过导航链接-默认隐藏*/
@@ -227,8 +351,9 @@
         a:focus, button:focus {
             outline:3px solid #ff1439;
             outline-offset:2px;
-        }
-
+        }    
+        
+        
         /*高对比度支持*/
         @media (prefers-contrast:high) {
             .profile-card {
@@ -285,6 +410,23 @@
             }
         }
 
+        @media (max-width:768px) {
+            .learning-progress {
+                padding:15px;
+                margin:15px 0;
+            }
+            .progress-container {
+                flex-direction:column;
+                gap:10px;
+            }
+            .progress-text {
+                font-size:16px;
+            }
+            .task-stats {
+                font-size:12px;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -304,12 +446,46 @@
         <div class="profile-card" role="article" aria-labelledby="profile-heading">
             <div style="font-size:30px; text-align:center;" aria-hidden="true">+💻👧+</div>
             <h3 id="profile-heading">你好，我是Rinin!</h3>
-            <p>我是一名热情而专注的大学生，专业是电子商务，努力成为优秀的听障人士。</p>
-            <p><strong>🎋技能树：</strong><span aria-label="P S, A I, H T M L, C S S, JavaScript,英语,日语">PS、AI、HTML、CSS、JavaScprit、English、Japanese.</span></p>
+            <p>我是一名热情而专注的大学生，2004年出生的，性别女，血型是AB型，星座是摩羯座，专业是电子商务，努力成为优秀的听障人士。</p>
+            <p><strong>🎋技能树：</strong><span aria-label="P S, A I, H T M L, C S S, JavaScript,英语,日语">PS、AI、HTML、CSS、JavaScript、English、Japanese.</span></p>
             <p><strong>✨目标：</strong>在毕业之前，成为一名初级前端开发者，成为全面的战士,成为优秀的人。</p>
             <p><strong>📝座右铭：</strong>坚持就是力量，沉默不是障碍，而是武器。</p>
             <p><strong>🎢信念：</strong>要相信自己，一定会成功的，只是时间慢一点，脚步求稳当，享受过程。</p>
         </div>
+        <!--添加今日任务栏目-->
+        <section class="learning-progress">
+            <h2>今日学习进度</h2>
+            <!--进度条容器，包含进度条和百分比-->
+            <div class="progress-container">
+                <!--进度条背景-->
+                <div class="progress-bar">
+                    <!--进度条填充部分，动态的-->
+                    <div class="progress-fill" id="progressFill"></div><!--这个元素的宽度将通过JavaScript控制，表示进度-->
+                </div>
+                <!--百分比文字-->
+                <span class="progress-text" id="progressText">0%</span>
+            </div>
+            <!--任务列表-->
+            <ul class="task-list" id="taskList">
+                <!--任务将通过Javascript动态添加-->
+            </ul>
+            <!--添加新任务区域-->
+            <div class="add-task">
+                <input type="text" id="newTaskInput" placeholder="输入新的学习任务...">
+                <button onclick="addTask()">添加任务</button><!--onclick="addTask它告诉浏览器当点击这个按钮时，执行addTask函数"-->
+            </div>
+            <!--添加任务统计-->
+            <div class="task-stats" id="taskStats">
+                总任务：<span id="totalTasks">0</span> |
+                已完成：<span id="completedTasks">0</span> |
+                未完成：<span id="pendingTasks">0</span>
+            </div>
+            <!--添加重置按钮-->
+            <div style="text-align:center; margin-top:10px;">
+                <button onclick="resetTaskManually()">重置今日任务</button>
+            </div>
+        </section>
+
         <section class="projects-section">
             <h2 style="text-align:center; color:rgb(255, 255, 255); margin-bottom:30px;">我的项目展示</h2>
             <div class="projects-container">
@@ -319,7 +495,7 @@
                     <div class="project-preview-1">项目预览图1</div>
                     <br>
                     <button class="detail-btn" onclick="showProjectDetail('project1')">查看详情</button>
-                    <button class="detail-btn"><a href="个人网站.html" style="color:#83d3fc;">访问查看</a></button>
+                    <button class="detail-btn"><a href="index.html" style="color:#83d3fc;">访问查看</a></button>
                     <br>
                 </div>
                 <div class="project-card">
@@ -393,9 +569,140 @@
                 alert('项目名称：待开发项目\n\n状态：构思中...\n\n描述：即将迎来精彩项目，敬请期待！');
             }
         }
+
+        //任务数据-存储所有任务的地方
+        let tasks=[];
+
+        //保存任务到本地存储
+        function saveTasks() {
+            localStorage.setItem('tasks',JSON.stringify(tasks));
+        }
+
+        //获取页面上的元素
+        const taskList=document.getElementById('taskList');
+        const newTaskInput=document.getElementById('newTaskInput');
+        const progressFill=document.getElementById('progressFill');
+        const progressText=document.getElementById('progressText');
+        //渲染任务列表到页面上
+        function renderTaskList() {
+            //清空当前的任务列表
+            taskList.innerHTML=''
+            //为每个任务创建HTML元素
+            tasks.forEach((task,index) => {
+                const li=document.createElement('li');
+                li.className=`task-item ${task.completed ? 'completed' : ''}`;
+                //添加删除按钮
+                li.innerHTML=`
+                    <input type="checkbox" onchange="toggleTask(${index})" ${task.completed ? 'checked' : ''}>
+                    <span>${task.text}</span>
+                    <button class="delete-btn" onclick="deleteTask(${index})">×</button>
+                    `;
+                    taskList.appendChild(li);
+            });
+            saveTasks();
+        }   
+        //更新进度条显示 
+        function updateProgress() {
+            const totalTasks=tasks.length;
+            //如果没有任务，进度为0
+            if (totalTasks===0) {
+                progressFill.style.width='0%';
+                progressText.textContent='0%';
+                document.getElementById('totalTasks').textContent="0";
+                document.getElementById('completedTasks').textContent="0";
+                document.getElementById('pendingTasks').textContent="0";
+                return;
+            }
+            //计算完成百分比
+            const completedTasks=tasks.filter(task=>task.completed).length;
+            const progressPercentage=Math.round((completedTasks / totalTasks)*100);
+
+            //更新进度条和文字
+            progressFill.style.width=`${progressPercentage}%`;
+            progressText.textContent=`${progressPercentage}%`;
+        
+        //更新函数包含统计：
+        document.getElementById('totalTasks').textContent=totalTasks;
+        document.getElementById('completedTasks').textContent=completedTasks;
+        document.getElementById('pendingTasks').textContent=totalTasks-completedTasks;
+        }
+        //切换任务完成状态
+        function toggleTask(index) {
+            tasks[index].completed=!tasks[index].completed;
+            renderTaskList();
+            updateProgress();
+        }
+        //添加新任务
+        function addTask() {
+            const taskText=newTaskInput.value.trim();
+            //检查输入是否为空
+            if (taskText==='') {
+                alert('请输入任务内容！');
+                return;
+            }
+            //添加到任务数组
+            tasks.push({
+                text:taskText,
+                completed:false,
+                priority:'meduim'//默认中等优先级
+            });
+            //清空输入框
+            newTaskInput.value='';
+            //更新显示
+            renderTaskList();
+            updateProgress();
+        }
+        //删除任务
+        function deleteTask(index) {
+            if (confirm('确定要删除这个任务吗？')) {
+                tasks.splice(index,1);
+                saveTasks();
+                renderTaskList();
+                updateProgress();
+            }
+        }
+        //检查是否是同一天
+        function shouldResetTasks() {
+            const lastReset=localStorage.getItem('lastReset');
+            const today=new Date().toDateString();
+            return lastReset !==today;
+        }
+
+        //页面加载时检查是够需要重置
+        function initTasks() {
+            if (shouldResetTasks()) {
+                //重置任务
+                tasks=[];
+                //更新重置日期
+                localStorage.setItem('lastReset',new Date().toDateString());
+                localStorage.setItem('tasks',JSON.stringify(tasks));
+            } else {
+                //加载之前的任务
+                tasks=JSON.parse(localStorage.getItem('tasks')) || [];
+            }
+            renderTaskList();
+            updateProgress();
+        }
+
+        //页面加载时调用
+        initTasks();
+
+        //手动重置任务（不管是不是同一天）
+        function resetTaskManually() {
+            if (confirm('确定要重置所有任务吗？这将清空今日的进度。')) {
+                tasks=[];
+                localStorage.setItem('lastReset',new Date().toDateString());
+                saveTasks();
+                renderTaskList();
+                updateProgress();
+            }
+        }
+
+        //暗黑模式切换
         function toggleDarkMode() {
             const isDarkMode = document.body.classList.toggle('dark-mode');
-            const button = document.getElementById('dark-mode-toggle');
+            const button = document.getElementById('dark-mode-toggle');       
+
             //更新ARIA状态
             button.setAttribute('aria-pressed',isDarkMode);
 
@@ -435,6 +742,16 @@
             };
             return themes[color] || '新';
         }
+
+        //初始化：渲染任务列表
+        renderTaskList();
+        updateProgress();
+        //添加回车键支持
+        newTaskInput.addEventListener('keypress',function(e) {
+            if (e.key==='Enter') {
+                addTask();
+            }
+        });
 
     </script>
 </body>
