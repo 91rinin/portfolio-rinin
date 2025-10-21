@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale">
+        <title>趣味小游戏</title>
+        <style>
+            /*全局样式重叠，确保在不同浏览器中表现不一致*/
+            * {
+                box-sizing:border-box;
+                margin:0;
+                padding:0
+            }
+            /*页面整体样式*/
+            body {
+                background-color:blueviolet;
+                padding: 2px;
+                color:white;
+                font-family:"Microsoft YaHei",sans-serif;
+                min-height:100vh;
+                line-height:1.6;
+            }
+            /*主容器样式*/
+            .container {
+                max-width:900px;
+                margin:0 auto;
+                background:white;
+                padding:30px;
+                border-radius:20px;
+                box-shadow:0 10px 30px rgba(0,0,0,0.1);
+            }
+            /*主标题样式*/
+            h1 {
+                color:#ff6b6b;
+                text-align:center;
+                margin-bottom:30px;
+                font-size:2.5rem;
+            }
+            /*欢迎区域样式*/
+            .welcome-section {
+                text-align:center;
+                margin-bottom:40px;
+            }
+            /*表情符号样式*/
+            .emoji {
+                font-size:3rem;
+                margin-bottom:15px;
+            }
+            /*课程卡片央视*/
+            .lesson-card {
+                background-color:#f8f9fa;
+                padding:25px;
+                border-radius:15px;
+                margin:20px 0;
+                border-left:5px solid #ffb6b6;
+                transition:all 0.3s ease;
+            }
+            /*二级标题样式*/
+            h2 {
+                color:#ff6b6b;
+                margin-bottom:15px;
+            }
+            /*交互区域样式*/
+            .interactive-area {
+                background:#fff4f4;
+                padding:25px;
+                border-radius:12px;
+                margin:20px 0;
+                text-align:center;
+            }
+            /*按钮基础样式*/
+            .btn {
+                background:#ff6b6b;
+                color:white;
+                border:none;
+                padding:15px 25px;
+                border-radius:10px;
+                cursor:pointer;/*鼠标指针变为手型*/
+                margin:10px;
+                font-size:1.1rem;
+                transition:all 0.3s ease;
+            }
+            /*按钮悬停效果*/
+            .btn:hover {
+                background:#ff4757;
+                transform:translateY(-3px);
+                box-shadow:0 5px 15px rgba(9,0,0,0.1);
+            }
+            /*结果显示样式*/
+            .result-box {
+                background:#2d3436;
+                color:aqua;
+                border-radius:10px;
+                margin:20px auto;
+                max-width:500px;
+                min-height:100px;
+                border:2px dashed #ff6b6b;
+            }
+            /*颜色框样式*/
+            .color-box {
+                width:100px;
+                height:100px;
+                margin:15px auto;
+                border-radius:10px;
+                transition:all 0.3s ease;
+            }
+            /*代码示例区域样式*/
+            .code-example {
+                background:#2d3436;
+                color:#f8f9fa;
+                padding:20px;
+                border-radius:10px;
+                margin:20px 0;
+                overflow:auto;
+                font-family:'Courier New',monospace;
+            }
+            /*成功状态样式*/
+            .success {
+                background:#4cd137 !important;
+            }
+            /*鼓励区域样式*/
+            .encouragement {
+                text-align:center;
+                margin-top:30px;
+                padding:20px;
+                background:linear-grandient(135deg,#4cd137 0% #3498db 100%);
+                color:white;
+                border-radius:15px;
+            }
+            /*媒体查询-响应式设计，针对小屏幕设备*/
+            @media (max-width:768px) {
+                .container {
+                    padding:20px;
+                }
+                h1 {
+                    font-size:2rem;
+                }
+                .btn {
+                    padding:12px 20px;
+                    font-size:1rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <!--欢迎区域-->
+            <div class="welcome-section">
+                <div class="emoji">🎋</div>
+                <h1>rinin的前端学习</h1>
+                <p>来一起玩三个小游戏吧，一点不难哦！</p>
+            </div>
+            <!--第一课：改变文字-->
+            <div class="lesson-card">
+                <h2>游戏一：魔法改变文字</h2>
+                <p>点击按钮，让文字变起来！</p>
+
+                <div class="interactive-area">
+                    <!--按钮绑定click事件，调用函数changeText-->
+                    <button class="btn" onclick="changeText()">点击变形！</button>
+                    <!--结果显示区域，有唯一ID供JavaScript操作-->
+                    <div class="result-box" id="textResult">
+                        <h3>我是普通文字</h3>
+                        <p>点击按钮看我变身吧！</p>
+                    </div>
+                </div>
+
+                <!--代码示例区域-->
+                <div class="code-example">
+                    //这就是变魔术的代码吗!<br>
+                    function changeText() {<br>
+                    &nbsp;&nbsp;let box=document.getElementById("textResult");<br>
+                    &nbsp;&nbsp;box.innerHTML="<3>我变身啦！</3><p>编程就像变魔术！</p>";<br>
+                    &nbsp;&nbsp;box.style.backgroundColor="#ffeaa7";<br>
+                    }
+                </div>
+            </div>
+        <!--第二课：改变颜色-->
+        <div class="lesson-card">
+            <h2>游戏二：色彩的魔法</h2>
+            <p>点击按钮，改变盒子的颜色！</p>
+
+            <div class="interactive-area">
+                <button class="btn" onclick="changeColor()">变颜色！</button>
+                <button class="btn" onclick="resultColor()">还原颜色！</button>
+                <div class="color-box" id="colorBox" style="background:#ff6b6b;"></div>
+            </div>
+
+            <div class="code-example">
+                //改变颜色的代码<br>
+                function changeColor() {<br>
+                &nbsp;&nbsp;let box=document.getElementById("colorBox");<br>
+                &nbsp;&nbsp;box.style.background="linear-gradient(135deg,#3498db,#9b59b6)";<br>
+                &nbsp;&nbsp;box.style.transform="rotate(45deg) scale(1.2)";<br>
+                }
+            </div>
+        </div>
+        </div>
+
+        <!--JavaScript代码-->
+        <script>
+            //游戏一：改变文字
+            function changeText() {
+                //获取ID为textResult的元素
+                let box = document.getElementById("textResult");
+                //修改元素内部的HTML内容
+                box.innerHTML="<h3>我变身啦！</h3><p>编程就像变魔术！很简单吧？</p>";
+                box.style.backgroundColor="#ffeaa7";
+                box.style.borderColor="#fdcb6e";
+            }
+            //改变颜色
+            function changeColor() {
+                let box=document.getElementById("colorBox");
+                box.style.background="linear-gradient(135deg,#3498db,#9b59b6)";
+                box.style.transform="rotate(45deg) scale(1.2)";
+            }
+
+            function resultColor() {
+                let box=document.getElementById("colorBox");
+                box.style.background="#ff6b6b";
+                box.style.transform="rotate(0deg) scale(1)";
+            }
+        </script>
+    </body>
+</html>

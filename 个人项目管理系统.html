@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Vue练习-项目管理系统</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        /*基础样式*/
+        body {
+            font-family:'Microsoft YaHei', sans-serif;
+            max-width:800px;
+            margin:0 auto;
+            padding:20px;
+            background-color:#f5f5f5;
+            color:#333;
+        }
+        /*项目卡片样式*/
+        .project-card {
+            background-color:white;
+            border-radius:8px;
+            padding:15px;
+            margin:10px 0;
+            box-shadow:0 2px 4px rgba(0,0,0,0.1);
+        }
+        /*已完成项目的样式-左边绿色边框*/
+        .completed {
+            border-left:4px solid #4caf50;
+        }
+        /*未完成项目的样式-左边橙色边框*/
+        .pending {
+            border-left:4px solid #ff9800;
+        }
+        /*按钮基础样式*/
+        button {
+            background:#4caf50;
+            color:white;
+            border:none;
+            padding:8px 12px;
+            border-radius:4px;
+            cursor:pointer;
+            margin:5px;
+        }
+        /*删除按钮的特殊样式-红色*/
+        button.delete {
+            background-color:#f44336;
+        }
+        /*暗黑模式下的样式*/
+        .dark-mode {
+            background-color:#1a1a1a;
+            color:#f0f0f0;
+        }
+        /*暗黑模式下的项目卡片样式*/
+        .dark-mode .project-card {
+            background-color:#2d2d2d;
+        }
+    </style>
+</head>
+<body>
+    <!--Vue应用挂载点-所有Vue代码都在这个div运行-->
+    <div id="app">
+        <!--显示标题，使用Vue的数据绑定-->
+        <h1>{{title}}</h1>
+        <!--控制区域：输入和按钮-->
+        <div>
+            <!--输入框：绑定到newProject变量，回车键触发添加项目-->
+            <input v-model="newProject" placeholder="输入新项目名称" @keyup.enter="addProject">
+            <!--添加项目按钮-->
+            <button @click="addProject">添加项目</button>
+            <!--切换暗黑模式按钮，文字根据darkMode状态变化-->
+            <button @click="toggleDarkMode">{{darkMode ?'浅色模式' : '暗黑模式'}}</button>
+        </div>
+        <!--项目列表循环渲染-->
+        <!--
+            v-for:循环projects数组中的每个项目
+            :key:为每个项目提供唯一标识（使用索引）
+            :class:动态设置CSS类，根据完成状态显示不同样式
+        -->
+        <div v-for="(project, index) in projects" :key="index"
+            :class="['project-card', project.completed ? 'completed' : 'pending' ]">
+            <!--显示项目名称-->
+            <h3>{{project.name}}</h3>
+            <!--显示项目状态，根据completed-属性显示不同文字-->
+            <p>状态：{{project.completed ? '已完成' :'进行中'}}</p>
+            <!--切换完成状态按钮，文字根据当前状态变化-->
+            <button @click="toggleCompleted(index)">
+                {{project.completed ? '标记为进行中' :'标记为已完成'}}
+            </button>
+            <!--删除项目按钮，有特殊的删除样式-->
+            <button class="delete" @click="removeProject(index)">删除</button>
+        </div>
+        <!--空状态提示：当没有项目时显示-->
+        <div v-if="projects.length ===0">
+            <p>暂无项目，请添加项目</p>
+        </div>
+    </div>
+
+    <script>
+        //从Vue中解构需要的函数
+        const {createApp, ref} =Vue;
+        //创建Vue应用
+        createApp({
+            //setip函数是Vue 3的组合式API入口
+            setup() {
+                //定义响应式数据
+                const title=ref('我的项目管理系统');//刷新页面
+                const newProject=ref('');//新项目输入框的值
+                const darkMode=ref(false);//暗黑模式状态
+                //项目列表数据，包含两个初级项目
+                const projects=ref([
+                    {name:'个人作品集网站',completed:true},//已完成的项目
+                    {name:'待办事项应用',completed:false}//未完成的项目
+                ]);
+
+                //添加新项目的函数
+                function addProject() {
+                    //检查素如是否为空（去掉前后空格）
+                    if (newProject.value.trim()) {
+                        //向项目列表中添加新项目
+                        projects.value.push({
+                            name:newProject.value,//项目名称
+                            completed:false //初级状态未完成
+                        });
+                        //清空输入框
+                        newProject.value='';
+                    }
+                }
+                //切换项目完成状态的函数
+                function toggleCompleted(index) {
+                    //去反当前项目的完成状态
+                    projects.value[index].completed=!projects.value[index].completed;
+                }
+                //删除项目的函数
+                function removeProject(index) {
+                    //从数组中删除指定索引的项目
+                    projects.value.splice(index,1);
+                }
+                //切换暗黑模式的函数
+                function toggleDarkMode(index) {
+                    //切换暗黑模式状态
+                   darkMode.value=!darkMode.value;
+                    //切换body的dark-mode类
+                   document.body.classList.toggle('dark-mode',darkMode.value);
+                }
+                //返回所有需要在模板中使用的数据和方法
+                return {
+                    title,
+                    newProject,
+                    projects,
+                    darkMode,
+                    addProject,
+                    toggleCompleted,
+                    removeProject,
+                    toggleDarkMode
+                };
+            }
+        }).mount('#app')//将Vue应用挂载为app的DOM元素上
+    </script>
+</body>
+</html>

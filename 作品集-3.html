@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width = device-width,initial-scale=1.0">
+        <title>作品集</title>
+        <style>
+            body {
+                background-color:rgb(206, 174, 236);
+                border-radius:20px;
+                margin:10px;
+                box-shadow:10px rgba(0,0,0,0.1);
+                color:white;
+                transition:all 0.3s ease;
+            }
+            nav {
+                background-color:rgb(190, 128, 249);
+                padding:20px;
+                border-radius:20px;
+                transition:all 0.3s ease;
+            }
+            nav a {
+                color:rgb(0, 0, 0);
+                text-decoration:none;
+                padding:5px 10px;
+                border-radius:10px;
+                margin-right:15px;
+                transition:all 0.3s ease ;
+            }
+            nav a:hover {
+                color:rgb(255, 255, 255) !important;
+                background-color:rgb(145, 47, 20);
+                transform:translateY(-2px);
+            }
+            .project-card {
+                background-color:rgb(230, 204, 246);
+                padding:10px;
+                margin:10px;
+                border-radius:10px;
+                box-shadow:0 5px 10px rgba(0,0,0,0.1);
+                width:300px;
+                transition: all 0.3s ease;
+            }
+            .project-card:hover {
+                transform:translateY(-5px) scale(1.02);
+                box-shadow:0 5px 10px rgba(0,0,0,0.1);
+            }
+            .project-preview-1 {
+                background-color:rgb(126, 126, 184);
+                height: 180px;
+                padding:10px;
+                color:rgb(255, 255, 255);
+                border-radius:10px;
+                cursor:auto;
+                font-size:20px;
+                display:flex;
+                justify-content: center;
+                align-items:center;
+                transition:all 0.3s ease;
+            }
+            .project-preview-2 {
+                background-color:rgb(126, 126, 184);
+                height: 180px;
+                padding:10px;
+                color:rgb(255, 255, 255);
+                border-radius:10px;
+                cursor:auto;
+                font-size:20px;
+                display:flex;
+                justify-content: center;
+                align-items:center;
+                transition:all 0.3s ease;
+            }
+            .project-preview-3 {
+                background-color:rgb(126, 126, 184);
+                height: 180px;
+                padding:10px;
+                color:rgb(255, 255, 255);
+                border-radius:10px;
+                cursor:auto;
+                font-size:20px;
+                display:flex;
+                justify-content: center;
+                align-items:center;
+                transition:all 0.3s ease;
+            }
+            .coming-soon {
+                background-color:rgb(126, 126, 184);
+                height: 180px;
+                padding:10px;
+                color:rgb(255, 255, 255);
+                border-radius:10px;
+                cursor:auto;
+                font-size:20px;
+                display:flex;
+                justify-content: center;
+                align-items:center;
+                transition:all 0.3s ease;
+            }
+            .detail-btn {
+                background-color:white;
+                color:rgb(221,194,107);
+                border:none;
+                padding:8px 15px;
+                border-radius:5px;
+                cursor:auto;
+                margin-top:10px;
+                width:100%;
+                transition:all 0.3s ease;
+            }
+            .detail-btn:hover {
+                transform:translateY(-2px);
+                background-color:black;
+                color:white;
+            }
+            .projects-section {
+                background-color:rgb(60, 68, 41);
+                padding:40px 20px;
+                border-radius:15px;
+                margin:40px 0;
+            }
+            .projects-container {
+                display: flex;
+                flex-wrap:wrap;
+                justify-content: center;
+                gap:20px;
+            }
+            @media (max-width:768px) {
+                body {
+                    padding:10px;
+                }
+                .project-card {
+                    width:100%;
+                    margin:10px 0;
+                }
+                nav {
+                    text-align:center;
+                }
+                nav a {
+                    display:flex;
+                    margin:10px 0;
+                }
+                .projects-container {
+                    flex-direction:column;
+                    align-items:center;
+                }
+            }
+            @media (max-width:480px) {
+                h1 {
+                    font-size:24px;
+                }
+                .project-card {
+                    padding:15px;
+                }
+                .projects-section {
+                    padding:20px 10px;
+                }
+                img {
+                    width:100%;
+                    max-width:300px;
+                }
+            }
+
+
+        </style>
+    </head>
+    <body>
+        <h1 id="myTitle">作品集</h1>
+        <nav>
+            <a href="index.html" style="margin-right:15px;">首页</a>
+            <a href="关于我-2.html" style="margin-right:15px;">关于我</a>
+            <a href="作品集-3.html" style="margin-right:15px;">作品集</a>
+            <a href="联系方式-4.html" style>联系方式</a>
+        </nav>
+        <section class="projects-section">
+            <h2 style="text-align:center;color:white;margin-bottom: 30px;">我的项目展示</h2>
+            <div class="projects-container">
+                <div class="project-card">
+                    <h3 style="color:white;">个人空间网站</h3>
+                    <p>创建一个网站，HTML,CSS.JavaScript.</p>
+                    <div class="project-preview-1">项目预览图1</div>
+                    <br>
+                    <button class="detail-btn" onclick="showProjectDetail('project1')">查看详情</button>
+                    <button class="detail-btn"><a href="个人网站.html" style="color:blueviolet;">访问查看</a></button>
+                    <br>
+                </div>
+                <div class="project-card">
+                    <h3 style="color:white;">项目管理系统</h3>
+                    <p>创建一个初级的项目管理系统，Vue</p>
+                    <div class="project-preview-2">项目预览图2</div>
+                    <br>
+                    <button class="detail-btn" onclick="showProjectDetail('project2')">查看详情</button>
+                    <button class="detail-btn"><a href="个人项目管理系统.html" style="color:blueviolet;">访问查看</a></button>
+                    <br>
+                </div>
+                <div class="project-card">
+                    <h3 style="color:white;">趣味小游戏网站</h3>
+                    <p>创建一个小游戏网站。</p>
+                    <div class="project-preview-3">项目预览图3</div>
+                    <button class="detail-btn" onclick="showProjectDetail('project3')">查看详情</button>
+                    <button class="detail-btn"><a href="小游戏.html" style="color:blueviolet;">访问查看</a></button>
+                    <br>
+                </div>
+                <div class="project-card">
+                    <h3 style="color:white;">待开发项目</h3>
+                    <p>下一个项目正在构思中，敬请期待!</p>
+                    <div class="coming-soon">coming soon...</div>
+                    <button class="detail-btn" onclick="showProjectDetail('project4')">查看详情</button>
+                </div>
+            </div>
+        </section>
+        <script>
+            function showProjectDetail(projectId) {
+                if (projectId==='project1') {
+                    alert('项目名称：个人空间网站\n\n技术栈：HTML,CSS,JavaScript\n\n描述：这是我独立构建的一个初级响应式个人网站。');
+                } else if (projectId==='project2') {
+                    alert('项目名称：项目管理系统\n\n描述：运用Vue，构建一个初级的项目管理系统。');
+                } else if (projectId==='project3') {
+                    alert('项目名称：小游戏\n\n描述：这是我独立构建的一个小游戏网站，水平不高的。');
+                } else if (projectId==='project4') {
+                    alert('项目名称：待开发项目\n\n状态：构思中...\n\n描述：即将迎来精彩项目，敬请期待！');
+                }
+            }
+        </script>
+    </body>
+</html>
